@@ -1,5 +1,6 @@
 // 노드에서 경로를 쉽게 조작하려고 주는 실행기
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     name: 'word-relay-setting',
@@ -20,10 +21,21 @@ module.exports = {
             test: /\.jsx?/,
             loader: 'babel-loader',
             options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
+                presets: [
+                    ['@babel/preset-env', {
+                        targets: { browsers: ['> 5% in KR', 'last 2 chrome versions']}, // browserslist
+                        debug: true,
+                    }], 
+                    '@babel/preset-react',
+                ],
+                plugins: [],
             },
         }],
     },
+
+    plugins: [
+        new webpack.LoaderOptionsPlugin({ debug: true }),
+    ],
 
     // 출력
     output: {
