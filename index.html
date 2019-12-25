@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta charset="UTF-8" />
         <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
@@ -8,33 +9,63 @@
         <div id="root"></div>
 
         <script type="text/babel">
-            // const e = React.createElement;
             
-            class LikeButton extends React.Component {
+            class GuGuDan extends React.Component {
                 constructor(props) {
                     super(props);
                     this.state = {
-                        liked: false
+                        firstNumber: Math.ceil(Math.random() * 9),
+                        secondNumber: Math.ceil(Math.random() * 9),
+                        value: '',
+                        result: '',
                     };
+                    this.onChange = this.onChange.bind(this);
+                    this.onSubmit = this.onSubmit.bind(this);
+                };
+
+                onChange = (e) => {
+                    this.setState({ value : e.target.value })
+                };
+                
+                onSubmit = (e) => {
+                    e.preventDefault();
+                    if (parseInt(this.state.value) === this.state.firstNumber * this.state.secondNumber) {
+                        this.setState({
+                            result: `${this.state.firstNumber * this.state.secondNumber} 정답!`,
+                            firstNumber: Math.ceil(Math.random() * 9),
+                            secondNumber: Math.ceil(Math.random() * 9),
+                            value: ''
+                        });
+                    } else {
+                        this.setState({
+                            result: `땡! 정답은 ${this.state.firstNumber * this.state.secondNumber}`,
+                            value: ''
+                        })
+                    }
                 };
 
                 render() {
-                    return <button type="submit" onClick={() => {this.setState({ liked: true })}}>
-                            {this.state.liked === true ? 'Like?' : 'Like!'}
-                        </button>
-                    // e(
-                    //     'button', 
-                    //     {onClick: () => { this.setState({ liked: true })}, type: 'submit' }, 
-                    //     this.state.liked === true ? 'Liked!': 'Like?'
-                    // );
 
-                    // babel : 자바스크립트에서 html 태그를 사용할 수 있게 하는 JSX 문법을 사용할 수 있게 한다
-                    // JSX : (JS + XML)
+                    return (
+                        <div>
+                            <div>{this.state.firstNumber} 곱하기 {this.state.secondNumber} 는?</div>
+                            <form onSubmit={this.onSubmit}>
+                                <input type="number" value={this.state.value} onChange={this.onChange} />
+                                <button>입력 !</button>    
+                            </form>
+                            <div>결과 <p>{this.state.result}</p></div>
+                        </div>
+                    );
                 };
             }
+
+            // Math.ceil() : 소수점 이하를 올림한다.
+            // input.onchange = (e) => { console.log(e.target.value )}
+            // onchange, onclick, oninput ... : 자바스크립트 핸들러
+
         </script>
         <script type="text/babel">
-            ReactDOM.render(<div><LikeButton /><LikeButton /><LikeButton /></div>, document.querySelector("#root"));
+            ReactDOM.render(<div><GuGuDan /></div>, document.querySelector("#root"));
         </script>
     </body>
 </html>
