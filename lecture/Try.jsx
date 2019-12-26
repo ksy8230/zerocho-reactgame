@@ -1,25 +1,29 @@
-import React, { PureComponent, memo } from 'react';
+import React, { PureComponent, memo, useState } from 'react';
 
-// class Try extends PureComponent {
-//     render( ) {
-//         const { tryInfo } = this.props;
-//         return (
-//             <li>
-//                 <div>{tryInfo.try}</div>
-//                 <div>{tryInfo.result}</div>
-//             </li>
-//         );
+class Try extends PureComponent {
+    render( ) {
+        const { tryInfo } = this.props;
+        return (
+            <li>
+                <div>{tryInfo.try}</div>
+                <div>{tryInfo.result}</div>
+            </li>
+        );
+    }
+}
+
+// const Try = memo(({ tryInfo }) => {
+//     const [ result, setResult ] = useState(tryInfo.result);
+//     const onClick = () => {
+//         setResult('1')
 //     }
-// }
-
-const Try = memo(({ tryInfo }) => {
-    return (
-        <li>
-            <div>{tryInfo.try}</div>
-            <div>{tryInfo.result}</div>
-        </li>
-    )
-});
+//     return (
+//         <li>
+//             <div>{tryInfo.try}</div>
+//             <div onClick={onClick}>{result}</div>
+//         </li>
+//     )
+// });
 
 // const Try = ( props ) => {
 //     return (

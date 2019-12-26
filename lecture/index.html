@@ -2,7 +2,23 @@
     <head>
         <meta charset="UTF-8" />
     </head>
+
     <body>
+        <style>
+            #screen {
+                width: 200px;
+                height: 200px;
+            }
+            #screen.waiting {
+                background-color: palegoldenrod;
+            }
+            #screen.ready {
+                background-color: orangered;
+            }
+            #screen.now {
+                background-color: greenyellow;
+            }
+        </style>
         <div id="root"></div>
         <script src="./dist/app.js"></script>
     </body>
