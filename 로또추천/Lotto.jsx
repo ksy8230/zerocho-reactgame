@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef, useEffect } from 'react';
+import React, { Component, useState, useRef, useEffect, useMemo } from 'react';
 import Ball from './Ball';
 
 function getWinNumbers () {
@@ -16,7 +16,9 @@ function getWinNumbers () {
 }
 
 const Lotto = () => {
-  const [winNumbers, setWinNumbers] = useState(getWinNumbers());
+  const lottoNumbers = useMemo(() => getWinNumbers(), []);
+  // useMemo : 복잡한 함수 결과값을 기억
+  const [winNumbers, setWinNumbers] = useState(lottoNumbers);
   const [winBalls, setWinBalls] = useState([]);
   const [bonus, setBonus] = useState(null);
   const [redo, setRedo] = useState(false);
