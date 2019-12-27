@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef, useEffect, useMemo } from 'react';
+import React, { Component, useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Ball from './Ball';
 
 function getWinNumbers () {
@@ -47,14 +47,20 @@ const Lotto = () => {
   }, [timeouts.current]); 
   // useEffect 두번째 인자가 빈배열이면 componentDidMount랑 같다
   // 배열에 요소가 있으면 componentDidMount랑 componentDidUpdate 둘 다 수행
-  const onClickRedo = () => {
+
+  const onClickRedo = useCallback(() => {
     console.log('onclickRedo')
+    console.log(winNumbers);
     setWinNumbers(getWinNumbers());
     setWinBalls([]);
     setBonus(null);
     setRedo(false);
     timeouts.current = [];
-  };
+  }, [winNumbers]);
+  // useCallback : 함수 자체를 기억해서 다시 랜더링될 때 해당 함수가 생성되지 않는다
+  // useCallback 안에서 사용하는 state들은 두번째 배열 인자에도 넣어줘야한다
+  // 그렇지 않으면 useCallback 함수가 기억을 해버려서 state가 바뀌지 않음
+  // [] : 어떨 때 이 함수가 다시 실행되는지 결정
 
   return (
     <>
