@@ -25,6 +25,21 @@ const Lotto = () => {
 
   const timeouts = useRef([]);
 
+  // componentDidMount에서만 작동
+  useEffect(() => {
+    // AJAX
+  }, []);
+
+  // componentDidUpdate에서만 작동
+  const mounted = useRef(false);
+  useEffect(() => {
+    if (!mounted.current) {
+        mounted.current = true;
+    } else {
+        // AJAX
+    }
+  }, [바뀌는값]);
+
   useEffect(() => {
     console.log('useEffect');
     for (let i = 0; i < winNumbers.length - 1; i++){
@@ -61,6 +76,10 @@ const Lotto = () => {
   // useCallback 안에서 사용하는 state들은 두번째 배열 인자에도 넣어줘야한다
   // 그렇지 않으면 useCallback 함수가 기억을 해버려서 state가 바뀌지 않음
   // [] : 어떨 때 이 함수가 다시 실행되는지 결정
+
+  // 자식 컴포넌트에게 onClick={onClickRedo} 와 같이 함수를 넘길때도
+  // useCallback을 사용해야 자식이 부모의 함수를 기억한다
+  // 그렇지 않으면 부모의 함수가 계속 바뀌는 것으로 인지해서 리랜더링을 한다
 
   return (
     <>
