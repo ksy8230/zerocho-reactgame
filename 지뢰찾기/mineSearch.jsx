@@ -16,9 +16,6 @@ export const CODE = {
 // 1. createContext 만들기 / 전달 초기값 설정
 export const TableContext = createContext({
   tableData : [
-    [-1,-1,-1,-1,-1,-1,-1],
-    [-7,-1,-1,-1,-1,-1,-1],
-    [-1,-1,-1,-1,-1,-1,-1],
   ],
   dispatch: () => {},
 });
@@ -27,6 +24,36 @@ const initialState = {
   tableData : [],
   timer : 0,
   result:'',
+};
+
+const plantMine = (row, cell, mine) => {
+  console.log(row,cell,mine)
+  const candidate = Array(row*cell).fill().map((arr,i)=>{ return i });
+  // EX. shuffle: 1~100숫자중 랜덤으로 mine 수만큼 뽑은 정렬 
+  const shuffle = [];
+  while(candidate.length > row*cell - mine) {
+    const chosen = candidate.splice(Math.floor(Math.random() * candidate.length), 1)[0];
+    shuffle.push(chosen);
+  }
+  const data = [];
+  // row * cell 표만들기
+  for ( let i = 0; i < row; i++) {
+    const rowData = [];
+    data.push(rowData);
+    for (let j = 0; j < cell; j++) {
+      rowData.push(CODE.NORMAL);
+    }
+  }
+  // shuffle 배열의 수를 표에 심기(지뢰 심기)
+  for (let k = 0; k < shuffle.length; k++){
+    const ver = Math.floor(shuffle[k]/cell);
+    const hor = shuffle[k] % cell;
+    data[ver][hor] = CODE.MINE;
+  }
+
+  console.log(data)
+  return data;
+
 };
 
 export const START_GAME = 'START_GAME';
