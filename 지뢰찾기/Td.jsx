@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TableContext } from './mineSearch';
 
-const Td = () => {
+const getTdStyle = (code) => {
+
+};
+
+const getTdText = (code) => {
+
+};
+
+const Td = ({rowIndex, cellIndex}) => {
+    const { tableData } = useContext(TableContext);
   return (
-    <td></td>
+    <td>{tableData[rowIndex][cellIndex]}</td>
   );
 }
 
