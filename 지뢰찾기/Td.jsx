@@ -25,7 +25,7 @@ const getTdStyle = (code) => {
             }}
         default : 
         return {
-            background : '#eee'
+            background : '#fff'
         }
     }
 };
@@ -36,8 +36,8 @@ const getTdText = (code) => {
             return '';
         case CODE.MINE : 
             return 'x';
-        case CODE.OPENED:
-            return '';
+        // case CODE.OPENED:
+        //     return '';
         case CODE.CLICKED_MINE:
             return '펑';
         case CODE.FLAG:
@@ -47,7 +47,7 @@ const getTdText = (code) => {
         case CODE.QUESTION_MINE:
             return '?';
         default:
-            return '';
+            return code || '';
     }
 };
 
